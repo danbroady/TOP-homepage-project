@@ -1,5 +1,5 @@
 /* Import fonts */
-/* @import url(); */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Syne:wght@400..800&display=swap');
 
 /* CSS Reset */
 html, body, div, span, applet, object, iframe,
@@ -25,4 +25,145 @@ time, mark, audio, video, button {
 }
 button {
     all:unset;
+}
+ul, li {
+	list-style-type: none;
+}
+
+
+* {
+	/* outline: solid 1px red; */
+}
+
+
+/* Colours */
+
+:root {
+	/* background-color */
+	--primary-bg-colour: #0A192F;
+	--secondary-bg-colour: #0D223B;
+	--primary-card-colour: #112240;
+	--secondary-card-colour: #172A45;
+	--btn-hover-colour: rgba(81, 255, 161, 0.1);
+
+	/* text color */
+	--header-colour: #E6F1F2;
+	--text-colour: #8892B0;
+	--accent-colour: #51ffa1;
+}
+
+/* Global styling */
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: "Inter", sans-serif;
+	background-color: var(--primary-bg-colour);
+	color: var(--header-colour);
+}
+h1 {
+	font-family: "Syne", sans-serif;
+	font-size: 48px;
+	font-weight: 700;
+}
+h2 {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 18px;
+	font-weight: 300;
+	color: var(--accent-colour);
+}
+p {
+	font-family: "Inter", sans-serif;
+	font-size: 13px;
+	font-weight: 300;
+	color: var(--text-colour);
+}
+
+.body-section {
+	padding: calc(1rem + 1vw) 0;
+	scroll-margin-top: 80px;
+}
+
+a {
+	text-decoration: none;
+}
+
+
+
+
+/* Header */
+header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	z-index: 1000;
+	position: sticky;
+	top: 0;
+
+	background-color: rgba(10, 25, 47, 0.3);
+	backdrop-filter: blur(10px);
+
+	transition: transform 300ms ease, box-shadow 300ms ease;
+}
+#header-links {
+	display: flex;
+	margin-right: 15px;
+	gap: 40px;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 0.9em;
+	font-weight: 100;
+	color: var(--text-colour);
+}
+.nav-num {
+	color: var(--accent-colour);
+}
+
+#header-links > li > a {
+	text-wrap: nowrap;
+	color: var(--text-colour);
+	background: linear-gradient(var(--accent-colour) 0 0) 
+		bottom left/ var(--underline-width, 0%) 0.05em
+		no-repeat;
+	transition: background-size 0.3s, color 0.3s;
+}
+#header-links > li > a:hover {
+	--underline-width: 100%;
+	color: var(--accent-colour);
+}
+
+.header-hidden {
+	transform: translateY(-100%);
+}
+.header-scrolled {
+	box-shadow: 0 3px 12px 0 #040e1d97;
+}
+
+
+/* 01/ About */
+
+
+
+
+
+/* 02/ Featured projects */
+
+#featured-section {
+	background-color: var(--secondary-bg-colour);
+	clip-path: polygon(0 5vw, 100% 0, 100% calc(100% - 5vw), 0 100%);
+	padding: calc(4rem + 5vw) 2rem;
+}
+
+/* 03/ Other projects */
+
+
+
+/* 04/ Contact section */
+#contact-section {
+	background-color: var(--secondary-bg-colour);
+	clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%);
+	padding: calc(4rem + 5vw) 2rem;
 }
