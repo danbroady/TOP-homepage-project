@@ -32,7 +32,7 @@ ul, li {
 
 
 * {
-	outline: solid 1px red;
+	/* outline: solid 1px red; */
 }
 
 
@@ -76,10 +76,24 @@ section {
 	padding: 0 clamp(2rem, 9vw, 150px);
 }
 .section-container {
-	outline: solid 1px green;
+	margin: 0 auto;
 	max-width: 900px;
 	min-width: 300px;
-	margin: 0 auto;
+
+	opacity: 0;
+	transform: translateX(-100vw);
+	transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+	will-change: transform, opacity;
+}
+.body-section.slide-left .section-container {
+    transform: translateX(-100vw);
+}
+.body-section.slide-right .section-container {
+    transform: translateX(100vw);
+}
+.body-section.is-visible .section-container {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 h1 {
@@ -95,7 +109,7 @@ h3 {
 }
 p {
 	font-family: "Inter", sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 300;
 	color: var(--text-colour);
 }
@@ -165,9 +179,18 @@ header {
 	color: var(--accent-colour);
 }
 
+#header-hamburger {
+	display: none;
+	height: 30px;
+	width: 30px;
+}
+
 @media (max-width: 700px) {
 	#header-links {
 		display: none;
+	}
+	#header-hamburger {
+		display: inline-block;
 	}
 }
 @media (max-width: 1000px) {
@@ -175,6 +198,8 @@ header {
 		gap: 20px;
 	}
 }
+
+
 
 
 /* Sidebars */
@@ -270,10 +295,61 @@ header {
 #hero-section {
 	display: flex;
 	flex-direction: row;
+	margin-top: 20px;
 }
-#hero-container {
 
+#hero-name {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
 }
+#hero-name:hover {
+	animation: 0.9s name-jump 1 alternate 0.1s;
+}
+#hero-name::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    
+    background: linear-gradient(90deg, var(--accent-colour), var(--accent-colour));
+    background-size: 420px 100%;
+    background-position: -420px 0;
+    background-repeat: no-repeat;
+}
+#hero-name:hover::after {
+	animation: name-underline 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+@keyframes name-jump {
+	0% {
+		transform: translateY(0);
+    }
+    35% {
+        transform: translateY(-6px); /* Lifts up as the line sweeps across */
+    }
+    70% {
+        transform: translateY(2px);  /* Slight settle */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes name-underline {
+	0% {
+		background-position: -420px 0;
+	}
+	100% {
+		background-position: calc(100% + 420px) 0;;
+	}
+}
+
+#hero-container > h3 {
+	padding: 10px 0 20px 0;
+}
+
+
 #hero-container > h2 {
 	font-family: "Syne", sans-serif;
 	font-size: 64px;
@@ -282,7 +358,7 @@ header {
 }
 #hero-container > p {
 	width: 50%;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 .paragraph-link {
