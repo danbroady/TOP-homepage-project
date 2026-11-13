@@ -105,16 +105,37 @@ body {
     transform: translateX(0);
 }
 
-#section-title {
-
+.section-title {
+	display: flex;
+	text-wrap: nowrap;
+	align-items: center;
+	flex-direction: row;
+	gap: 15px;
+	color: var(--header-colour);
+	transition: color 0.3s ease;
 }
-#section-title::after {
-
+.section-title::after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: linear-gradient(to left, #8892b000, var(--text-colour));
+}
+.body-section:hover .section-title {
+	color: var(--accent-colour);
+}
+.section-num {
+	color: var(--accent-colour);
 }
 
 h1 {
 	font-family: "Syne", sans-serif;
 	font-size: 84px;
+	font-weight: 700;
+}
+h2 {
+	font-family: "Syne", sans-serif;
+	font-size: 36px;
 	font-weight: 700;
 }
 h3 {
@@ -125,15 +146,9 @@ h3 {
 }
 p {
 	font-family: "Inter", sans-serif;
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: 300;
 	color: var(--text-colour);
-}
-
-.body-section {
-	/* padding-top: calc(1rem + 1vw);
-	padding-bottom: calc(1rem + 1vw);
-	scroll-margin-top: 80px; */
 }
 
 .light-bg {
@@ -316,11 +331,6 @@ header {
 
 
 /* Hero */
-
-#hero-section {
-	/* margin-top: 20px; */
-}
-
 #hero-name {
     position: relative;
     display: inline-block;
@@ -369,9 +379,8 @@ header {
 }
 
 #hero-container > h3 {
-	padding: 10px 0 20px 0;
+	padding: 10px 0 12px 0;
 }
-
 
 #hero-container > h2 {
 	font-family: "Syne", sans-serif;
@@ -388,7 +397,7 @@ header {
 	text-wrap: nowrap;
 	color: var(--accent-colour);
 	background: linear-gradient(var(--accent-colour) 0 0) 
-		bottom left/ varx(--underline-width, 0%) 0.05em
+		bottom left/ var(--underline-width, 0%) 0.05em
 		no-repeat;
 	transition: background-size 0.3s;
 }
@@ -406,14 +415,16 @@ header {
 	#hero-container > h2 {
 		font-size: 52px;
 	}
-
 }
+
+
 
 /* 01/ About */
 
 
-/* 02/ Featured projects */
 
+
+/* 02/ Featured projects */
 #featured-section {
 
 }
@@ -423,53 +434,52 @@ header {
 
 
 /* 03/ Other projects */
-
-
-/* <section class="body-section slide-right" id="projects-section">
-                <div class="project-card" id="project-card-1">
-                    <div class="project-img-container"><img></div>
-                    <div class="project-content-container">
-                        <div class="project-content-top">
-                            <h4>Project name</h4>
-                            <div>
-                                <a class="proj-link">GH</a>
-                                <a class="proj-link">LV</a>
-                            </div>
-                        </div>
-                        <div class="project-content-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam, natus. Natus culpa a accusamus ratione cupiditate deleniti</div>
-                        <footer>
-                            <ul class="project-content-tech">
-                                <li>HTML</li */
-#projects-section * {
-	/* outline: solid 1px red; */
-}
 #projects-container {
-	/* display: grid; */
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
 }
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+	gap: 20px;
+}
+
 .project-card {
-	height: 400px;
-	min-width: 250px;
-	max-width: 80%;
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	max-height: 450px;
 	border-radius: 3px;
 
+	opacity: 0;
+	transform: translateY(20px);
+
 	background: var(--secondary-card-colour);
-	box-shadow: 0px 1px 5px 0px #0a192f6e;
-	transition: box-shadow 0.3s ease, transform 0.3s ease;
+	box-shadow: 0px 0px 10px 2px #0a192f6e;
+
+	transition: box-shadow 0.3s ease, transform 0.3s ease,
+				opacity 0.6s ease calc(var(--card-index, 0)*0.15s),
+				transform 0.6s ease calc(var(--card-index, 0)*0.15s);
 }
 .project-card:hover {
-	box-shadow: 0px 5px 5px 0px var(--primary-bg-colour);
+	box-shadow: 0px 5px 5px 2px var(--primary-bg-colour);
 	transform: translateY(-5px);
+}
+.project-card.is-visible {
+    opacity: 1;
+	transform: translateY(0);
 }
 
 .project-img-link {
-    /* display: block; */
     text-decoration: none;
     cursor: pointer;
 }
 .project-img-container {
 	position: relative;
 	width: 100%;
-	height: 55%;
+	height: 200px;
 
 	background-size: cover;
 	background-position: center;
@@ -498,8 +508,8 @@ header {
 	flex-direction: column;
 	justify-content: space-between;
 	gap: 10px;
-	padding: 10px;
-	height: 45%;
+	padding: 20px;
+	height: 100%;
 	overflow: scroll;
 
 }
@@ -517,6 +527,9 @@ header {
 }
 .project-card:hover .project-content-top>h4 {
 	color: var(--accent-colour);
+}
+.project-content-top > h4 > a {
+	color: inherit;
 }
 .project-links {
 	display: flex;
@@ -548,6 +561,7 @@ header {
 	flex-grow: 1;
 	color: var(--text-colour);
 	font-size: 14px;
+	overflow: scroll;
 }
 .project-content-tech {
 	display: flex;
@@ -568,13 +582,22 @@ header {
 	background-image: url(./resources/dog.jpeg);
 }
 #project-card-2 .project-img-container {
-	/* background-image: url(./resources/dog.jpeg); */
+	background-image: url(./resources/dog.jpeg);
 }
 
 
 @media (max-width: 1000px) {
+	.card-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
 	.project-img-container::before {
 		backdrop-filter: blur(0px);
+	}
+}
+@media (max-width: 700px) {
+	.card-grid {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -582,8 +605,30 @@ header {
 
 
 /* 04/ Contact section */
-#contact-section {
+#contact-section * {
+	outline: solid 1px red;
 	/* background-color: var(--secondary-bg-colour);
 	clip-path: polygon(0 5vw, 100% 0, 100% 100%, 0 100%);
 	padding: calc(4rem + 5vw) 0; */
+}
+#contact-container {
+	/* text-align: center; */
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+#contact-title {
+	font-family: "Syne", sans-serif;
+	font-size: 36px;
+	font-weight: 700;
+}
+#contact-desc {
+	display: flex;
+	gap: 20%;
+}
+#contact-desc > div {
+	
+}
+#contact-btn {
+
 }

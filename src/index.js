@@ -1,6 +1,6 @@
 headerAnimation();
 sectionLoadAnimation();
-
+projectsLoadAnimation();
 
 
 // DOM - Header dynamics
@@ -43,4 +43,26 @@ function sectionLoadAnimation() {
     });
 
     sections.forEach(section => observer.observe(section));
+};
+
+function projectsLoadAnimation() {
+    const cards = document.querySelectorAll(".project-card");
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            };
+        });
+    }, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    });
+
+    cards.forEach((card, index) => {
+        card.style.setProperty('--card-index', index);
+        observer.observe(card);
+    });
 };
